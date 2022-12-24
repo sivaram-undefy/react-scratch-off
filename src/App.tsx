@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Components/Navbar/Navbar";
-//import Card1 from "./Components/Card1/Card1";
+import Card1 from "./Components/Card1/Card1";
 import Card2 from "./Components/Card2/Card2";
 
 
@@ -14,9 +14,9 @@ function App() {
     <Navbar />
     <div className="container">
       <div className="card">
-        <p className="pak">lesca-react-scratch-card </p>
+        <p className="pak">scratchcard-react-abhinav </p>
         <div className="carding">
-          //card1 component
+          <Card1/>
         </div>
       </div>
       <div className="card">
