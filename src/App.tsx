@@ -14,7 +14,7 @@ function App() {
     <Navbar />
     <div className="container">
       <div className="card">
-        <p className="pak">scratchcard-react-abhinav </p>
+        <p className="pak">scratchcard-react </p>
         <div className="carding">
           <Card1/>
         </div>

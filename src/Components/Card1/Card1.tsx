@@ -2,121 +2,127 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from "../../assets/Images/scratch-card.jpg";
 import "./Card1.css";
 
-function Card1(props: any) {
+const Card1 = () => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
-    const card = useRef<HTMLCanvasElement>(null);
-
-    const [status, setStatus] = useState({
-        isDrawing: false,
-        startX: 0,
-        startY: 0,
-
-    });
+    const [isDrawing, setIsDrawing] = useState(false);
 
     useEffect(() => {
-        const canvas = card.current;
+        const canvas = canvasRef.current;
 
-        const context = canvas?.getContext('2d');
+        if (canvas) {
 
-        canvas?.addEventListener('mousedown', scratchStart);
-        canvas?.addEventListener('mousemove', scratch);
-        canvas?.addEventListener('mouseup', scratchEnd);
+            const ctx = canvas.getContext("2d");
+            if (ctx) {
+                ctx.fillStyle = "grey";
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(300, 0);
+                ctx.lineTo(0, 100000);
 
-        canvas?.addEventListener("touchstart", scratchStart);
-        canvas?.addEventListener("touchmove", scratch);
-        canvas?.addEventListener("touchend", scratchEnd);
 
-        if (context) {
-            context.fillStyle = '#ddd';
-            context.fillRect(0, 0, 300, 300);
-            context.lineWidth = 60;
-            context.lineJoin = "round";
+                ctx.closePath();
+                ctx.fill();
 
+                contextRef.current = ctx;
+            }
         }
+    }, []);
 
+    const handleMouseDown = (e: any) => {
+        const { offsetX, offsetY } = e;
+        if (contextRef?.current) {
 
+            contextRef.current.beginPath();
 
+            contextRef.current.moveTo(offsetX, offsetY);
 
-
-
-    }, [])
-
-
-    const scratchStart = (e: any) => {
-        const { layerX, layerY } = e;
-
-        setStatus({
-            isDrawing: true,
-            startX: layerX,
-            startY: layerY
-        });
+            setIsDrawing(true);
+        }
     };
 
-    const scratchEnd = (e: any) => {
-        setStatus({
-            ...status,
-            isDrawing: false,
+    const handleMouseUp = () => {
+        if (contextRef?.current) {
 
-        });
+
+            contextRef.current.closePath();
+
+            setIsDrawing(false);
+        }
     };
 
-    const scratch = (e: any) => {
-        const { layerX, layerY } = e;
-        const context = card.current?.getContext("2d");
+    const handleMouseOut = () => {
+        setIsDrawing(false);
+    };
 
+    const handleMouseMove = (e: any) => {
+        const { offsetX, offsetY } = e.nativeEvent;
+        const ctx = contextRef.current;
+        if (isDrawing && ctx) {
 
-        if (status.isDrawing && context) {
-            context.globalCompositeOperation = "destination-out";
-            context.beginPath();
-            context.moveTo(status.startX, status.startY);
-            context.lineTo(layerX, layerY);
-            context.closePath();
-            context.stroke();
+            ctx.beginPath();
 
-            setStatus({
-                ...status,
-                startX: layerX,
-                startY: layerY
-            });
+            ctx.globalCompositeOperation = "destination-out";
 
+            ctx.arc(offsetX, offsetY, 16, 0, Math.PI * 2, false);
 
-
-
-
-        } else {
-            return;
+            ctx.fill();
         }
+    };
+
+    const handleTouchStart = (e: any) => {
+        var rect = e.target.getBoundingClientRect();
+        var x = e.targetTouches[0].pageX - rect.left;
+        var y = e.targetTouches[0].pageY - rect.top;
+        if (contextRef?.current) {
 
 
+            contextRef.current.beginPath();
 
+            contextRef.current.moveTo(x, y);
 
+            setIsDrawing(true);
+        }
+    };
 
-    }
+    const handleTouchmove = (e: any) => {
+        var rect = e.target.getBoundingClientRect();
+        var x = e.targetTouches[0].pageX - rect.left;
+        var y = e.targetTouches[0].pageY - rect.top;
+        const ctx = contextRef.current;
+        if (isDrawing && ctx) {
 
+            ctx.beginPath();
 
+            ctx.globalCompositeOperation = "destination-out";
 
+            ctx.arc(x, y, 16, 0, Math.PI * 2, false);
 
-
-
-
-
-
-
-
-
+            ctx.fill();
+        }
+    };
 
     return (
-        <canvas ref={card} id="canvas" />
-
-
-
-
-
-
-
-
-    )
-
-}
+        <canvas
+            id="canvas"
+            width="300"
+            height="300"
+            style={{
+                backgroundImage: `url(${Image})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+            }}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseOut={handleMouseOut}
+            onMouseMove={handleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleMouseUp}
+            onTouchMove={handleTouchmove}
+            ref={canvasRef}
+        />
+    );
+};
 
 export default Card1;
