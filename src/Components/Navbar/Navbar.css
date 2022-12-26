@@ -1,0 +1,15 @@
+.Navbar{
+    display:flex;
+    background-color: coral;
+    height:50px;
+    margin-bottom: 30px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.main{
+    font-weight: 600;
+    font-size: 23px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
