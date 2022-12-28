@@ -1,10 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from "../../assets/Images/scratch-card.jpg";
 import "./Card1.css";
 
 const Card1 = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const contextRef = useRef<CanvasRenderingContext2D | null>(null);
+    const [totalPixels, setTotalPixels] = useState<number>(0);
+    const [percentage, setPercentage] = useState<number>(100);
+
+
+
 
     const [isDrawing, setIsDrawing] = useState(false);
 
@@ -16,19 +21,50 @@ const Card1 = () => {
             const ctx = canvas.getContext("2d");
             if (ctx) {
                 ctx.fillStyle = "grey";
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo(300, 0);
-                ctx.lineTo(0, 100000);
+
+                ctx.fillRect(0, 0, 300, 300);
 
 
-                ctx.closePath();
-                ctx.fill();
+        
 
                 contextRef.current = ctx;
+                const pixelData = ctx.getImageData(0, 0, 300, 300).data;
+                const totalPixel = pixelData.reduce((a, b) => a + b, 0);
+                setTotalPixels(totalPixel);
             }
         }
     }, []);
+
+    const getPercentage = () => {
+        const canvas = canvasRef.current;
+
+        if (canvas) {
+
+            const ctx = canvas.getContext("2d");
+            if (ctx) {
+                const pixelData = ctx.getImageData(0, 0, 300, 300).data;
+                const amountUnscratched = pixelData.reduce((a, b) => a + b, 0);
+                const avg = Math.round((amountUnscratched / totalPixels) * 100);
+                setPercentage(avg);
+                percentage<60? (ctx.clearRect(0, 0, canvas.width, canvas.height)):([]);
+
+
+
+
+
+
+
+            }
+
+
+        }
+    }
+
+ 
+
+
+
+
 
     const handleMouseDown = (e: any) => {
         const { offsetX, offsetY } = e;
@@ -39,6 +75,9 @@ const Card1 = () => {
             contextRef.current.moveTo(offsetX, offsetY);
 
             setIsDrawing(true);
+            getPercentage();
+            
+            
         }
     };
 
@@ -49,11 +88,19 @@ const Card1 = () => {
             contextRef.current.closePath();
 
             setIsDrawing(false);
+            getPercentage();
+            
+
+
         }
     };
 
     const handleMouseOut = () => {
         setIsDrawing(false);
+        getPercentage();
+        
+
+
     };
 
     const handleMouseMove = (e: any) => {
@@ -68,6 +115,10 @@ const Card1 = () => {
             ctx.arc(offsetX, offsetY, 16, 0, Math.PI * 2, false);
 
             ctx.fill();
+            getPercentage();
+            
+
+
         }
     };
 
@@ -83,6 +134,10 @@ const Card1 = () => {
             contextRef.current.moveTo(x, y);
 
             setIsDrawing(true);
+            getPercentage();
+            
+
+
         }
     };
 
@@ -100,6 +155,10 @@ const Card1 = () => {
             ctx.arc(x, y, 16, 0, Math.PI * 2, false);
 
             ctx.fill();
+            getPercentage();
+            
+
+
         }
     };
 
