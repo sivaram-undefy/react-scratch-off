@@ -2,7 +2,10 @@ p {
   margin: 0;
 }
 
+.play {
+  position: relative;
+}
+
 #canvas {
-    width:300px;
-    height:300px;
+  position: absolute;
 }
