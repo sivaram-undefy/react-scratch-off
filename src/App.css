@@ -1,57 +1,28 @@
 body {
   font-family: "Andika", sans-serif;
-  background-color: rgb(47, 155, 185);
+  background-color: rgb(220, 236, 240);
   margin: 0;
+  margin-bottom: 30px;
+  height: 100vh;
 }
 
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 25px;
 }
 
 @media (max-width: 480px) {
   .container {
     flex-direction: column;
+    align-items: center;
+    row-gap: 25px;
   }
 
-  .card {
-    width: 400px;
-    height: 400px;
-    margin-bottom: 20px;
+  body {
+    margin-bottom: 35px;
   }
-
-  .carding {
-    width: 300px;
-    height: 300px;
-  }
-
-  .pak {
-    font-size: 15px;
-  }
-}
-
-.card {
-  background-color: coral;
-  align-self: center;
-  width: 400px;
-  height: 500px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.carding {
-  display: flex;
-  width: 300px;
-  height: 300px;
-  border-radius: 5px;
-  flex-direction: column;
-}
-
-.pak {
-  font-weight: 500;
-  font-size: 19px;
 }
