@@ -1,15 +1,16 @@
-.Navbar{
-    display:flex;
-    background-color: coral;
-    height:50px;
-    margin-bottom: 30px;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
+.Navbar {
+  display: flex;
+  background-color: rgb(198, 229, 236);
+  height: 50px;
+  margin-bottom: 30px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 1px 1px 1px black;
 }
 
-.main{
-    font-weight: 600;
-    font-size: 23px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+.main {
+  font-weight: 600;
+  font-size: 23px;
+  font-family: "Andika", sans-serif;
 }

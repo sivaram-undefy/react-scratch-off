@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import "./Card1.css";
 import image from "../../assets/Images/reel.png";
 
-
 const Card1 = (props: any) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -19,8 +18,9 @@ const Card1 = (props: any) => {
       if (ctx) {
         const img = new Image();
         img.src = image;
+        img.className = "trial";
         img.onload = () => {
-          ctx.drawImage(img, 0, 0, 300, 300);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           contextRef.current = ctx;
           const pixelData = ctx.getImageData(
             0,
@@ -32,6 +32,12 @@ const Card1 = (props: any) => {
           setTotalPixels(totalPixel);
         };
       }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDone) {
+      props.onDone();
     }
   }, [isDone]);
 
@@ -53,7 +59,6 @@ const Card1 = (props: any) => {
         if (avg < props.percent) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           setIsDone(true);
-          props.finisher();
         }
       }
     }
@@ -134,7 +139,7 @@ const Card1 = (props: any) => {
 
   return (
     <div
-      className="play"
+      className={props.class}
       style={{ width: props.dimension, height: props.dimension }}
     >
       {!isDone ? (
