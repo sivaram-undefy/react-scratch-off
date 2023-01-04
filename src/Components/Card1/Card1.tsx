@@ -14,7 +14,7 @@ const Card1 = (props: any) => {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d",{willReadFrequently: true});
       if (ctx) {
         const img = new Image();
         img.src = image;
@@ -45,7 +45,7 @@ const Card1 = (props: any) => {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d",{willReadFrequently: true});
       if (ctx) {
         const pixelData = ctx.getImageData(
           0,
