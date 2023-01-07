@@ -14,4 +14,5 @@ const Element = () => {
   );
 };
 
-export default Element;
+export default React.memo(Element) ;
+

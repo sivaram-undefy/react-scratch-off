@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 import Confetti from "react-confetti";
 
@@ -8,11 +8,14 @@ function Confetting(props: any) {
     height: window.innerHeight,
   });
 
-  const detectSize = () => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-  };
+
 
   useEffect(() => {
+
+    const detectSize = () => {
+      setDimension({ width: window.innerWidth, height: window.innerHeight });
+    };
+
     window.addEventListener("resize", detectSize);
     return () => {
       window.removeEventListener("resize", detectSize);
@@ -28,7 +31,8 @@ function Confetting(props: any) {
           colors={["grey", "blue"]}
           run={props.status}
           onConfettiComplete={() => {}}
-          numberOfPieces={300}
+          numberOfPieces={400}
+          recycle={false}
         />
       ) : null}
     </div>
