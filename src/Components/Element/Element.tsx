@@ -1,5 +1,4 @@
 import React from "react";
-import "./Element.css";
 
 const Element = () => {
   function getData() {
@@ -8,11 +7,10 @@ const Element = () => {
   }
 
   return (
-    <div className="contain">
+    <div className="flex flex-column justify-center items-center h-full w-full bg-orange-200">
       <p> {getData()}</p>
     </div>
   );
 };
 
-export default React.memo(Element) ;
-
+export default React.memo(Element);

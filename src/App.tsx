@@ -4,8 +4,6 @@ import Card1 from "./Components/Card1/Card1";
 import Confetting from "./Components/Confetting/Confetting";
 import Element from "./Components/Element/Element";
 
-import "./App.css";
-
 function App() {
   const [status, setStatus] = useState(false);
 
@@ -20,9 +18,8 @@ function App() {
     <>
       <Navbar />
       <Confetting status={status} />
-      <div className="container">
+      <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
         <Card1
-          class="play"
           dimension={300}
           percent={60}
           element={<Element />}

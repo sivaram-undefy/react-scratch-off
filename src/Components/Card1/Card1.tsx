@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "./Card1.css";
+
 import image from "../../assets/Images/reel.png";
 
 const Card1 = (props: any) => {
@@ -14,7 +14,7 @@ const Card1 = (props: any) => {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const ctx = canvas.getContext("2d",{willReadFrequently: true});
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
       if (ctx) {
         const img = new Image();
         img.src = image;
@@ -45,7 +45,7 @@ const Card1 = (props: any) => {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const ctx = canvas.getContext("2d",{willReadFrequently: true});
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
       if (ctx) {
         const pixelData = ctx.getImageData(
           0,
@@ -139,12 +139,12 @@ const Card1 = (props: any) => {
 
   return (
     <div
-      className={props.class}
+      className="relative"
       style={{ width: props.dimension, height: props.dimension }}
     >
       {!isDone ? (
         <canvas
-          id="canvas"
+          className="absolute bg-orange-500 shadow-md"
           width={props.dimension}
           height={props.dimension}
           onMouseDown={handleMouseDown}
@@ -158,7 +158,7 @@ const Card1 = (props: any) => {
         />
       ) : null}
       <div
-        className="content"
+        className="shadow-2xl"
         style={{ width: props.dimension, height: props.dimension }}
       >
         {props.element}

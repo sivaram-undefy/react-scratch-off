@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Confetti from "react-confetti";
 
@@ -8,10 +8,7 @@ function Confetting(props: any) {
     height: window.innerHeight,
   });
 
-
-
   useEffect(() => {
-
     const detectSize = () => {
       setDimension({ width: window.innerWidth, height: window.innerHeight });
     };

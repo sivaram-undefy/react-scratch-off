@@ -1,10 +1,9 @@
 import React from "react";
 
-import "./Navbar.css";
 function Navbar() {
   return (
-    <div className="Navbar">
-      <p className="main">Scratch Trials</p>
+    <div className="flex flex-row items-center mb-6 justify-center bg-cyan-100 h-11 shadow-md">
+      <p className=" font-semibold text-xl ">Scratch Trials</p>
     </div>
   );
 }
