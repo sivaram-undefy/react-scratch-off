@@ -11,18 +11,29 @@ function App() {
     setStatus(true);
     setTimeout(() => {
       setStatus(false);
-    }, 6000);
+    }, 3000);
+  }
+
+ 
+
+  function getData() {
+    const rand=["Better Luck next time!!","You have won 100$","You have won 50$","You have won 40$","You have won 10$"];
+    let item=rand[Math.floor(Math.random() * rand.length)];
+
+    return item;
+     
+   
   }
 
   return (
     <>
       <Navbar />
-      <Confetting status={status} />
+      <Confetting status={status}  />
       <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
         <Card1
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -30,7 +41,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()} />}
           onDone={onDone}
           radius={20}
         />
@@ -38,7 +49,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -46,7 +57,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -54,7 +65,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -62,7 +73,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -70,7 +81,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />
@@ -78,7 +89,7 @@ function App() {
           class="play"
           dimension={300}
           percent={60}
-          element={<Element />}
+          element={<Element data={getData()}/>}
           onDone={onDone}
           radius={20}
         />

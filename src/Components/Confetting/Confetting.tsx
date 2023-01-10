@@ -26,8 +26,8 @@ function Confetting(props: any) {
           width={Dimension.width}
           height={Dimension.height}
           colors={["grey", "blue"]}
-          onConfettiComplete={() => {}}
-          numberOfPieces={300}
+          onConfettiComplete={()=>{}}
+          numberOfPieces={100}
           
         />
       ) : null}

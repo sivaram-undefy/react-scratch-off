@@ -107,8 +107,8 @@ const Card1 = (props: any) => {
 
   const handleTouchStart = (e: any) => {
     var rect = e.target.getBoundingClientRect();
-    var x = e.targetTouches[0].pageX - rect.left;
-    var y = e.targetTouches[0].pageY - rect.top;
+    var x = e.targetTouches[0].clientX - rect.left;
+    var y = e.targetTouches[0].clientY - rect.top;
     if (contextRef?.current) {
       contextRef.current.beginPath();
 
@@ -121,8 +121,8 @@ const Card1 = (props: any) => {
 
   const handleTouchmove = (e: any) => {
     var rect = e.target.getBoundingClientRect();
-    var x = e.targetTouches[0].pageX - rect.left;
-    var y = e.targetTouches[0].pageY - rect.top;
+    var x = e.targetTouches[0].clientX - rect.left;
+    var y = e.targetTouches[0].clientY - rect.top;
     const ctx = contextRef.current;
     if (isDrawing && ctx) {
       ctx.beginPath();

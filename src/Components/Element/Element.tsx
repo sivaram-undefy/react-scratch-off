@@ -1,16 +1,13 @@
 import React from "react";
 
-const Element = () => {
-  function getData() {
-    const x = Math.floor(Math.random() * 100 + 1);
-    return `You have won $ ${x}`;
-  }
+const Element = (props:any) => {
+ 
 
   return (
     <div className="flex flex-column justify-center items-center h-full w-full bg-orange-200">
-      <p> {getData()}</p>
+      <p> {props.data}</p>
     </div>
   );
 };
 
-export default React.memo(Element);
+export default Element;
