@@ -17,19 +17,18 @@ function Confetting(props: any) {
     return () => {
       window.removeEventListener("resize", detectSize);
     };
-  }, [Dimension]);
+  }, []);
 
   return (
-    <div>
+    <div className="fixed inset-0 z-0">
       {props.status ? (
         <Confetti
           width={Dimension.width}
           height={Dimension.height}
           colors={["grey", "blue"]}
-          run={props.status}
           onConfettiComplete={() => {}}
-          numberOfPieces={400}
-          recycle={false}
+          numberOfPieces={300}
+          
         />
       ) : null}
     </div>
