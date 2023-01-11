@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
 function Confetting(props: any) {
+  const [comp, setComp] = useState(false);
+
   const [Dimension, setDimension] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -19,16 +21,27 @@ function Confetting(props: any) {
     };
   }, []);
 
+  useEffect(() => {
+    if (comp) {
+      props.onConfettiComplete();
+      setComp(false);
+    }
+  }, [comp]);
+
+  function setConf() {
+    setComp(true);
+  }
+
   return (
     <div className="fixed inset-0 z-0">
       {props.status ? (
         <Confetti
           width={Dimension.width}
           height={Dimension.height}
-          colors={["grey", "blue"]}
-          onConfettiComplete={()=>{}}
-          numberOfPieces={100}
-          
+          colors={["grey", "blue", "orange"]}
+          numberOfPieces={200}
+          recycle={false}
+          onConfettiComplete={setConf}
         />
       ) : null}
     </div>
