@@ -6,6 +6,16 @@ import Element from "./Components/Element/Element";
 
 function App() {
   const [status, setStatus] = useState(false);
+  const rand = [
+    "Better Luck next time!!",
+    "You have won 100$",
+    "You have won 50$",
+    "You have won 40$",
+    "You have won 10$",
+    "You have won 20$",
+    "You have won 30$",
+    "You have won 60$",
+  ];
 
   function onDone() {
     setStatus(true);
@@ -15,89 +25,24 @@ function App() {
     setStatus(false);
   }
 
-  function getData() {
-    const rand = [
-      "Better Luck next time!!",
-      "You have won 100$",
-      "You have won 50$",
-      "You have won 40$",
-      "You have won 10$",
-    ];
-    let item = rand[Math.floor(Math.random() * rand.length)];
-
-    return item;
-  }
-
   return (
     <>
       <Navbar />
       <Confetting status={status} onConfettiComplete={onConfettiComplete} />
-      <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
-        {}
-        <Card1
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-        <Card1
-          class="play"
-          dimension={300}
-          percent={60}
-          element={<Element data={getData()} />}
-          onDone={onDone}
-          radius={20}
-        />
-      </div>
+      {
+        <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
+          {rand.map((item) => (
+            <Card1
+              key={item}
+              dimension={300}
+              percent={60}
+              element={<Element data={item} />}
+              onDone={onDone}
+              radius={20}
+            />
+          ))}
+        </div>
+      }
     </>
   );
 }
