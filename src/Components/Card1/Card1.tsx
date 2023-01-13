@@ -2,7 +2,15 @@ import { useState, useRef, useEffect } from "react";
 
 import image from "../../assets/Images/reel.png";
 
-const Card1 = (props: any) => {
+interface Type {
+  onDone: () => void;
+  element: JSX.Element;
+  radius: number;
+  dimension: number;
+  percent: number;
+}
+
+const Card1 = (props: Type) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [totalPixels, setTotalPixels] = useState<number>(0);
