@@ -26,7 +26,7 @@ function App() {
               key={item}
               dimension={300}
               percent={60}
-              element={<Element data={`You have won $${item + 1}`} />}
+              element={<Element data={`You have won $${item}`} />}
               onDone={onDone}
               radius={20}
             />
