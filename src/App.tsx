@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Card1 from "./Components/Card1/Card1";
 import Confetting from "./Components/Confetting/Confetting";
 import Element from "./Components/Element/Element";
 
+interface Info {
+  id: string;
+  amount: number;
+}
+
 function App() {
+  const [data, setData] = useState<Info[]>([]);
   const [status, setStatus] = useState(false);
+
+  async function getData() {
+    try {
+      const res = await fetch("./price.json");
+      const info = (await res.json()) as Info[];
+      setData(info);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   function onDone() {
     setStatus(true);
@@ -21,12 +41,12 @@ function App() {
       <Confetting status={status} onConfettiComplete={onConfettiComplete} />
       {
         <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
-          {[...Array(12).keys()].map((item) => (
+          {data.map((item) => (
             <Card1
-              key={item}
+              key={item.id}
               dimension={300}
               percent={60}
-              element={<Element data={`You have won $${item+1}`} />}
+              element={<Element data={`You have won $${item.amount}`} />}
               onDone={onDone}
               radius={20}
             />

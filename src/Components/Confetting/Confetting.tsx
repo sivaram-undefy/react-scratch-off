@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import Confetti from "react-confetti";
 
-interface Type {
+interface ConfettiProps {
   status: boolean;
   onConfettiComplete: () => void;
 }
 
-function Confetting(props: Type) {
+function Confetting(props: ConfettiProps) {
   const [Dimension, setDimension] = useState({
     width: window.innerWidth,
     height: window.innerHeight,

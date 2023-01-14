@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 import image from "../../assets/Images/reel.png";
 
-interface Type {
+interface Card1Props {
   onDone: () => void;
   element: JSX.Element;
   radius: number;
@@ -10,7 +10,7 @@ interface Type {
   percent: number;
 }
 
-const Card1 = (props: Type) => {
+const Card1 = (props: Card1Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [totalPixels, setTotalPixels] = useState<number>(0);

@@ -1,10 +1,10 @@
 import React from "react";
 
-interface Type {
+interface ElementProps {
   data: string;
 }
 
-const Element = (props: Type) => {
+const Element = (props: ElementProps) => {
   return (
     <div className="flex flex-column justify-center items-center h-full w-full bg-orange-200">
       <p> {props.data}</p>
