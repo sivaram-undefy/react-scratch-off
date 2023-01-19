@@ -10,6 +10,7 @@ interface Info {
 }
 
 function App() {
+  const [cardIds, setCardIds] = useState<string[]>([]);
   const [data, setData] = useState<Info[]>([]);
   const [status, setStatus] = useState(false);
 
@@ -27,6 +28,10 @@ function App() {
     getData();
   }, []);
 
+  useEffect(() => {
+    console.log(cardIds);
+  }, [cardIds]);
+
   function onDone() {
     setStatus(true);
   }
@@ -40,9 +45,17 @@ function App() {
       <Navbar />
       <Confetting status={status} onConfettiComplete={onConfettiComplete} />
       {
-        <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center">
+        <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center ">
           {data.map((item) => (
             <Card1
+              onMouseEnter={() =>
+                setCardIds((current) => [...current, item.id])
+              }
+              onMouseLeave={() =>
+                setCardIds((current) =>
+                  current.filter((_, index) => index !== 0)
+                )
+              }
               key={item.id}
               dimension={300}
               percent={60}

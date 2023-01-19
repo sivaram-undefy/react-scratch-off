@@ -4,6 +4,8 @@ import image from "../../assets/Images/reel.png";
 
 interface Card1Props {
   onDone: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
   element: JSX.Element;
   radius: number;
   dimension: number;
@@ -147,7 +149,11 @@ const Card1 = (props: Card1Props) => {
 
   return (
     <div
-      className="relative"
+      className={
+        props.cardId == props.setCardId
+          ? "relative"
+          : "relative pointer-events-none"
+      }
       style={{ width: props.dimension, height: props.dimension }}
     >
       {!isDone ? (
@@ -155,6 +161,8 @@ const Card1 = (props: Card1Props) => {
           className="absolute bg-orange-500 shadow-md"
           width={props.dimension}
           height={props.dimension}
+          onMouseEnter={props.onMouseEnter}
+          onMouseLeave={props.onMouseLeave}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseOut={handleMouseOut}
