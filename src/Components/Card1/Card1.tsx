@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import image from "../../assets/Images/reel.png";
 
 interface Card1Props {
-  onDone: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  id?:string;
+  onDone: (id:string|undefined) => void;
+  
   element: JSX.Element;
   radius: number;
   dimension: number;
@@ -16,7 +16,6 @@ const Card1 = (props: Card1Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [totalPixels, setTotalPixels] = useState<number>(0);
-
   const [isDrawing, setIsDrawing] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
@@ -47,7 +46,7 @@ const Card1 = (props: Card1Props) => {
 
   useEffect(() => {
     if (isDone) {
-      props.onDone();
+      props.onDone(props.id);
     }
   }, [isDone]);
 
@@ -149,11 +148,7 @@ const Card1 = (props: Card1Props) => {
 
   return (
     <div
-      className={
-        props.cardId == props.setCardId
-          ? "relative"
-          : "relative pointer-events-none"
-      }
+      className={"relative"}
       style={{ width: props.dimension, height: props.dimension }}
     >
       {!isDone ? (
@@ -161,8 +156,7 @@ const Card1 = (props: Card1Props) => {
           className="absolute bg-orange-500 shadow-md"
           width={props.dimension}
           height={props.dimension}
-          onMouseEnter={props.onMouseEnter}
-          onMouseLeave={props.onMouseLeave}
+          
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseOut={handleMouseOut}

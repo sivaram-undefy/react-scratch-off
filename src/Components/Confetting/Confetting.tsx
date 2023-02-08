@@ -4,7 +4,9 @@ import Confetti from "react-confetti";
 
 interface ConfettiProps {
   status: boolean;
-  onConfettiComplete: () => void;
+  onConfettiComplete: (id?:string) => void;
+  id:string|undefined;
+  
 }
 
 function Confetting(props: ConfettiProps) {
@@ -28,12 +30,13 @@ function Confetting(props: ConfettiProps) {
     <div className="fixed inset-0 z-0">
       {props.status ? (
         <Confetti
+          id={props.id}
           width={Dimension.width}
           height={Dimension.height}
           colors={["grey", "blue", "orange"]}
           numberOfPieces={200}
           recycle={false}
-          onConfettiComplete={() => props.onConfettiComplete()}
+          onConfettiComplete={() => props.onConfettiComplete(props.id)}
         />
       ) : null}
     </div>

@@ -10,9 +10,8 @@ interface Info {
 }
 
 function App() {
-  const [cardIds, setCardIds] = useState<string[]>([]);
+  const [currentCardId, setCurrentCardId] = useState<string>();
   const [data, setData] = useState<Info[]>([]);
-  const [status, setStatus] = useState(false);
 
   async function getData() {
     try {
@@ -28,39 +27,38 @@ function App() {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(cardIds);
-  }, [cardIds]);
 
-  function onDone() {
-    setStatus(true);
+  function onDone(id: string) {
+    setCurrentCardId(id); 
   }
 
-  function onConfettiComplete() {
-    setStatus(false);
+  function onConfettiComplete(id?: string) {
+    if (!id) {
+      return;
+    }
+    setCurrentCardId((prevState) => (prevState === id ? undefined : prevState));
   }
 
   return (
     <>
       <Navbar />
-      <Confetting status={status} onConfettiComplete={onConfettiComplete} />
+      <h3>{currentCardId}</h3>
+      <Confetting
+       key={currentCardId}
+        status={Boolean(currentCardId)}
+        onConfettiComplete={onConfettiComplete}
+        id={currentCardId}
+      />
       {
         <div className="flex flex-row flex-wrap justify-around gap-y-5 mb-5 sm:flex-column items-center ">
           {data.map((item) => (
             <Card1
-              onMouseEnter={() =>
-                setCardIds((current) => [...current, item.id])
-              }
-              onMouseLeave={() =>
-                setCardIds((current) =>
-                  current.filter((_, index) => index !== 0)
-                )
-              }
               key={item.id}
+              id={item.id}
               dimension={300}
               percent={60}
               element={<Element data={`You have won $${item.amount}`} />}
-              onDone={onDone}
+              onDone={() => onDone(item.id)}
               radius={20}
             />
           ))}
