@@ -3,9 +3,8 @@ import { useState, useRef, useEffect } from "react";
 import image from "../../assets/Images/reel.png";
 
 interface Card1Props {
-  id?:string;
-  onDone: (id:string|undefined) => void;
-  
+  id?: string;
+  onDone: (id: string | undefined) => void;
   element: JSX.Element;
   radius: number;
   dimension: number;
@@ -50,7 +49,7 @@ const Card1 = (props: Card1Props) => {
     }
   }, [isDone]);
 
-  const getPercentage = () => {
+   const getPercentage = () => {
     const canvas = canvasRef.current;
 
     if (canvas) {
@@ -156,7 +155,6 @@ const Card1 = (props: Card1Props) => {
           className="absolute bg-orange-500 shadow-md"
           width={props.dimension}
           height={props.dimension}
-          
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseOut={handleMouseOut}

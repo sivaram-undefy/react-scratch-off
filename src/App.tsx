@@ -10,9 +10,21 @@ interface Info {
 }
 
 function App() {
-  const [currentCardId, setCurrentCardId] = useState<string>();
-  const [data, setData] = useState<Info[]>([]);
+  //Local storage initial value and persistor
+  const selectedValue = localStorage.getItem("selected");
+  let selected: string[];
+  try {
+    selected = selectedValue ? JSON.parse(selectedValue) : [];
+  } catch (e) {
+    selected = [];
+  }
 
+  //State variables
+  const [data, setData] = useState<Info[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>(selected);
+  const [currentCardId, setCurrentCardId] = useState<string>();
+
+  //API call function
   async function getData() {
     try {
       const res = await fetch("./price.json");
@@ -27,9 +39,15 @@ function App() {
     getData();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("selected", JSON.stringify(selectedIds));
+  }, [selectedIds]);
 
   function onDone(id: string) {
-    setCurrentCardId(id); 
+    setCurrentCardId(id);
+    if (!selectedIds.includes(id)) {
+      setSelectedIds((prevState) => prevState.concat(id));
+    }
   }
 
   function onConfettiComplete(id?: string) {
@@ -44,7 +62,7 @@ function App() {
       <Navbar />
       <h3>{currentCardId}</h3>
       <Confetting
-       key={currentCardId}
+        key={currentCardId}
         status={Boolean(currentCardId)}
         onConfettiComplete={onConfettiComplete}
         id={currentCardId}
@@ -56,7 +74,7 @@ function App() {
               key={item.id}
               id={item.id}
               dimension={300}
-              percent={60}
+              percent={0}
               element={<Element data={`You have won $${item.amount}`} />}
               onDone={() => onDone(item.id)}
               radius={20}
