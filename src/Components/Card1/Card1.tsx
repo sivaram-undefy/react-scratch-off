@@ -9,6 +9,7 @@ interface Card1Props {
   radius: number;
   dimension: number;
   percent: number;
+  isRevealed: boolean;
 }
 
 const Card1 = (props: Card1Props) => {
@@ -16,7 +17,7 @@ const Card1 = (props: Card1Props) => {
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [totalPixels, setTotalPixels] = useState<number>(0);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(props.isRevealed);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,7 +50,7 @@ const Card1 = (props: Card1Props) => {
     }
   }, [isDone]);
 
-   const getPercentage = () => {
+  const getPercentage = () => {
     const canvas = canvasRef.current;
 
     if (canvas) {

@@ -74,9 +74,12 @@ function App() {
               key={item.id}
               id={item.id}
               dimension={300}
-              percent={0}
+              isRevealed={selectedIds.includes(item.id)}
+              percent={70}
               element={<Element data={`You have won $${item.amount}`} />}
-              onDone={() => onDone(item.id)}
+              onDone={() =>
+                selectedIds.includes(item.id) ? null : onDone(item.id)
+              }
               radius={20}
             />
           ))}

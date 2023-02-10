@@ -4,9 +4,8 @@ import Confetti from "react-confetti";
 
 interface ConfettiProps {
   status: boolean;
-  onConfettiComplete: (id?:string) => void;
-  id:string|undefined;
-  
+  onConfettiComplete: (id?: string) => void;
+  id: string | undefined;
 }
 
 function Confetting(props: ConfettiProps) {
